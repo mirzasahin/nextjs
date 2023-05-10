@@ -1,16 +1,13 @@
 import Link from "next/link";
 import styled from "styled-components"
 
-
+const HeaderDiv = styled.div`
+background-color: pink;
+`
 
 export default () => (
-  <div>
-    <div>
+  <HeaderDiv>
       <Link href="/">Ana Sayfa</Link>
-    </div>
-
-    <div>
       <Link href="/about">Hakkımızda</Link>
-    </div>
-  </div>
+  </HeaderDiv>
 );
