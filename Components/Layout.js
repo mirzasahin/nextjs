@@ -10,7 +10,7 @@ export default ({children}) => (
   <BodyDiv>
     <Header />
     <h2 style={{backgroundColor:'tomato', width:"100vh", margin:"10px", padding:"10px"}}>{children}</h2>
-    <footer> Powered Mirza Sahin</footer>
+    <footer> Powered Mir Codes</footer>
 
   </BodyDiv>
 );
