@@ -12,8 +12,9 @@ const HeaderDiv = styled.div`
 
 export default () => (
   <HeaderDiv>
-    <Button href="/">Home Page</Button>
-    <Button href="/about">About</Button>
-    <Button href="/works">Works</Button>
+      <Button href="/">Home Page</Button>
+      <Button href="/about">About</Button>
+      <Button href="/works">Works</Button>
+      <Button href="/blog">Blog</Button>
   </HeaderDiv>
 );

@@ -14,7 +14,6 @@ display: flex;
 
 const Content = styled.h2`
   color: white;
-  display: flex;
   font-size: 15px;
   font-weight: 100;
   text-align: center;
@@ -35,7 +34,6 @@ const Footer = styled.footer`
 export default ({ children }) => (
   <BodyDiv>
     <Header />
-
     <ContentDiv>
       <Content>{children}</Content>
     </ContentDiv>
