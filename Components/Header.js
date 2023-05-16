@@ -1,30 +1,19 @@
-import Link from "next/link";
 import styled from "styled-components";
+import Button from "./Button";
 
 const HeaderDiv = styled.div`
   display: flex;
   gap: 20px;
-
-`;
-
-const StyledLinkTop = styled(Link)`
-  text-decoration: none;
-  color: white;
-  border: ${({ border }) => `${border}px`} solid yellow;
-  font-size: ${({big}) => big ? "30px" : "20px" };
-
-  cursor: pointer;
-  &:hover{
-    transition: 0.2s ease;
-    text-decoration: underline;
-  }
+  display: flex;
+  justify-content: center;
 `;
 
 
 
 export default () => (
   <HeaderDiv>
-    <StyledLinkTop big href="/">Home Page</StyledLinkTop>
-    <StyledLinkTop border={4} href="/about">About</StyledLinkTop>
+    <Button href="/">Home Page</Button>
+    <Button href="/about">About</Button>
+    <Button href="/works">Works</Button>
   </HeaderDiv>
 );

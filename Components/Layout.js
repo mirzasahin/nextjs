@@ -1,16 +1,45 @@
-import Link from "next/link";
 import Header from "./Header";
 import { styled } from "styled-components";
 
 const BodyDiv = styled.div`
-font-size: 20px;
-`
+width: 100%;
+`;
 
-export default ({children}) => (
+const ContentDiv = styled.div`
+margin-top: 20px;
+justify-content: center;
+display: flex;
+`;
+
+
+const Content = styled.h2`
+  color: white;
+  display: flex;
+  font-size: 15px;
+  font-weight: 100;
+  text-align: center;
+  justify-content: center;
+  width: 75%;
+  color: white;
+  opacity: 0.9;
+`;
+const Footer = styled.footer`
+  font-size: 15px;
+  color: white;
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+`;
+
+export default ({ children }) => (
   <BodyDiv>
     <Header />
-    <h2 style={{backgroundColor:'tomato', width:"100vh", margin:"10px", padding:"10px"}}>{children}</h2>
-    <footer> Powered Mir Codes</footer>
 
+    <ContentDiv>
+      <Content>{children}</Content>
+    </ContentDiv>
+
+    <Footer> Powered Mir Codes</Footer>
   </BodyDiv>
 );
