@@ -30,7 +30,7 @@ const Footer = styled.footer`
 `;
 
 
-export default ({ title, children }) => (
+export default ({ children }) => (
   <BodyDiv>
     <Header />
     <ContentDiv>
