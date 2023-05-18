@@ -1,19 +1,8 @@
+import fs from 'fs';
+import matter from 'gray-matter';
 import Link from "next/link";
 import Layout from "../../Components/Layout";
 import { styled } from "styled-components";
-
-const blogContents = [
-  {
-    href:"gunluk-1",
-    title: "Günlük Yazı 1",
-    content: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-  },
-  {
-    href:"gunluk-2",
-    title: "Günlük Yazı 2",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-  },
-];
 
 const BlogDiv = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
@@ -44,19 +33,53 @@ display: inline;
 }
 `;
 
-export default function Blog() {
+
+export default ({posts}) => {
   return (
     <Layout title="blog">
       <Title>Bloglar</Title>
       <Div>
-        {blogContents.map((item, index) => (
-          <BlogDiv key={index}>
-            <H1>{item.title}</H1>
-            <p>{item.content}</p>
-            <Button href={`/blog/${item.href}`}>Devamı..</Button>
-          </BlogDiv>
-        ))}
+      {posts.map(post => {
+            //extract slug and frontmatter
+            const {slug, frontmatter} = post
+            //extract frontmatter properties
+            const {title, author, category, date, bannerImage, tags} = frontmatter
+
+            //JSX for individual blog listing
+            return <article key={title}>
+                <Button href={`/blog/${slug}`}>
+                    <h1>{title}</h1>
+                </Button>
+                <h3>{author}</h3>
+                <h3>{date}</h3>
+            </article>
+        })}
       </Div>
     </Layout>
   );
+}
+
+//Generating the Static Props for the Blog Page
+export async function getStaticProps(){
+  // get list of files from the posts folder
+  const files = fs.readdirSync('posts');
+
+  // get frontmatter & slug from each post
+  const posts = files.map((fileName) => {
+      const slug = fileName.replace('.md', '');
+      const readFile = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+      const { data: frontmatter } = matter(readFile);
+
+      return {
+        slug,
+        frontmatter,
+      };
+  });
+
+  // Return the pages static props
+  return {
+      props: {
+        posts,
+      },
+  };
 }
