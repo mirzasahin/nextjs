@@ -19,9 +19,11 @@ padding: 0;
 const Div = styled.div`
   display: grid;
   gap: 20px;
+  text-align: start;
 `;
 
 const Title = styled.h1`
+text-align: start ;
 `;
 
 const Button = styled(Link)`

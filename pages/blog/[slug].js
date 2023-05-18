@@ -4,6 +4,7 @@ import { useRouter} from "next/router";
 import md from 'markdown-it';
 import Error from "next/error"
 import Layout from "../../Components/Layout";
+import { styled } from 'styled-components';
 
 
 /* const data = [
@@ -38,13 +39,19 @@ export default ({frontmatter, content}) => {
     router.back();
   }; */
 
+  const Div = styled.div`
+  text-align: start;
+  `
+
   return (
   <Layout>
+    <Div>
     <img src={bannerImage}/>
         <h1>{title}</h1>
         <h2>{author} || {date}</h2>
         <h3>{category} || {tags && tags.join()}</h3>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
+        </Div>
   </Layout>
   )
 }

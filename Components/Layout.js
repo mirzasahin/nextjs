@@ -18,6 +18,7 @@ const Content = styled.div`
   width: 75%;
   color: white;
   opacity: 0.9;
+  text-align: center;
 `;
 
 const Footer = styled.footer`
