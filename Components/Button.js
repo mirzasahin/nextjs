@@ -8,6 +8,7 @@ const StyledLinkTop = styled(Link)`
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
   padding-top: 20px;
+  padding-bottom: 30px;
 
   &:hover {
     color: white;
