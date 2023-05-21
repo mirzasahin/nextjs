@@ -15,6 +15,7 @@ export default () => (
       <Button href="/">Home Page</Button>
       <Button href="/about">About</Button>
       <Button href="/works">Works</Button>
+      <Button href="/movies">Movies</Button>
       <Button href="/blog">Blog</Button>
       <Button href="/contact">Contact</Button>
   </HeaderDiv>
