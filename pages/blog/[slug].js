@@ -73,7 +73,7 @@ export default ({ frontmatter, content }) => {
 //     paths,
 //     fallback: false,
 //   };
-// xD}
+// }
 
 export async function getServerSideProps({ params: { slug } }) {
   let path = `posts/${slug}.md`;
