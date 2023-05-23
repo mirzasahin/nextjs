@@ -1,11 +1,10 @@
-import fs from 'fs';
-import matter from 'gray-matter';
-import { useRouter} from "next/router";
-import md from 'markdown-it';
-import Error from "next/error"
+import fs from "fs";
+import matter from "gray-matter";
+import { useRouter } from "next/router";
+import md from "markdown-it";
+import Error from "next/error";
 import Layout from "../../Components/Layout";
-import { styled } from 'styled-components';
-
+import { styled } from "styled-components";
 
 /* const data = [
   {
@@ -21,11 +20,10 @@ import { styled } from 'styled-components';
   },
 ]; */
 
-export default ({frontmatter, content}) => {
+export default ({ frontmatter, content }) => {
+  const { title, author, category, date, bannerImage, tags } = frontmatter;
 
-  const {title, author, category, date, bannerImage, tags} = frontmatter
-
- /*  const router = useRouter()
+  /*  const router = useRouter()
   const { slug } = router.query
 
   let foundItem = data.find((dataItem) => dataItem.slug === slug)
@@ -40,46 +38,57 @@ export default ({frontmatter, content}) => {
   }; */
 
   const Div = styled.div`
-  text-align: start;
-  `
+    text-align: start;
+  `;
 
   return (
-  <Layout>
-    <Div>
-    <img src={bannerImage}/>
+    <Layout>
+      <Div>
+        <img src={bannerImage} />
         <h1>{title}</h1>
-        <h2>{author} || {date}</h2>
-        <h3>{category} || {tags && tags.join()}</h3>
+        <h2>
+          {author} || {date}
+        </h2>
+        <h3>
+          {category} || {tags && tags.join()}
+        </h3>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
-        </Div>
-  </Layout>
-  )
-}
+      </Div>
+    </Layout>
+  );
+};
 
 // Generating the paths for each post
-export async function getStaticPaths() {
-  // Get list of all files from our posts directory
-  const files = fs.readdirSync("posts");
-  // Generate a path for each one
-  const paths = files.map((fileName) => ({
-    params: {
-      slug: fileName.replace(".md", ""),
-    },
-  }));
-  // return list of paths
-  return {
-    paths,
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   // Get list of all files from our posts directory
+//   const files = fs.readdirSync("posts");
+//   // Generate a path for each one
+//   const paths = files.map((fileName) => ({
+//     params: {
+//       slug: fileName.replace(".md", ""),
+//     },
+//   }));
+//   // return list of paths
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// xD}
 
-export async function getStaticProps({ params: { slug } }) {
-  const fileName = fs.readFileSync(`posts/${slug}.md`, 'utf-8');
-  const { data: frontmatter, content } = matter(fileName);
-  return {
-    props: {
-      frontmatter,
-      content,
-    },
-  };
+export async function getServerSideProps({ params: { slug } }) {
+  let path = `posts/${slug}.md`;
+  if (fs.existsSync(path)) {
+    const fileName = fs.readFileSync(path, "utf-8");
+    const { data: frontmatter, content } = matter(fileName);
+    return {
+      props: {
+        frontmatter,
+        content,
+      },
+    };
+  }else{
+    return {
+      notFound: true,
+    };
+  }
 }

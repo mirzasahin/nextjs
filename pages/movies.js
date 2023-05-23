@@ -35,8 +35,8 @@ export default function Movies() {
       <MovieList>
         {movies.map((item) => (
           <MovieCard>
-            <Image width={300} height={400} src={item.posterURL} />
-            <b key={item.id}>
+            <Image alt="image" key={item.id} width={300} height={400} src={item.posterURL} />
+            <b >
               {item.title} - {item.id}
             </b>
           </MovieCard>
